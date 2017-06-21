@@ -1,5 +1,6 @@
 map <F2> :NERDTreeToggle<CR>
 map <Leader>nt: NERDTree %:p:h<CR>
+AirlineTheme quantum
 
 set ruler
 set relativenumber
