@@ -1,13 +1,30 @@
-map <F2> :NERDTreeToggle<CR>
-map <Leader>nt: NERDTree %:p:h<CR>
-set ruler
+" Essential Vundle setting
+set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'kristijanhusak/vim-hybrid-material'
+Plugin 'mattn/emmet-vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'scrooloose/nerdtree'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'majutsushi/tagbar'
+
+" control p
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+
+call vundle#end()
+filetype plugin indent on
+
 set relativenumber
 set number
-set backspace=indent,eol,start
-set t_Co=256
-set term=screen-256color
-set t_8f=[38;2;%lu;%lu;%lum
-set t_8b=[48;2;%lu;%lu;%lum
+syntax on
+set guicursor=i:block
 set hlsearch
 set incsearch
 set ignorecase
@@ -19,35 +36,14 @@ set tabstop=2
 set autoindent
 set smartindent
 set encoding=utf-8
+set guioptions=
+
+autocmd vimenter * NERDTree
+autocmd vimenter * TagbarOpen
+
 set background=dark
-set guifont=Inconsolata\ for\ Powerline:h18
-set nocompatible
-filetype plugin on
-set rtp+=~/.vim/bundle/Vundle.vim
+colorscheme hybrid_material
+let g:airline_theme = "hybrid"
 
-call vundle#begin()
-
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'Yggdroot/indentLine'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'Lokaltog/vim-powerline'
-Plugin 'crusoexia/vim-monokai'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'honza/vim-snippets'
-Plugin 'scrooloose/snipmate-snippets'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
-Plugin 'kien/ctrlp.vim'
-
-call vundle#end()
-
-colorscheme monokai
-
-syntax on
-
-let g:indentLine_leadingSpaceEnabled = 1
-let g:indentLine_leadingSpaceChar = '_'
-set laststatus=2
+" Emmet vim expand by tab
+imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
