@@ -3,47 +3,108 @@ set nocompatible
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
+
+" Vundle start
 call vundle#begin()
+
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'kristijanhusak/vim-hybrid-material'
-Plugin 'mattn/emmet-vim'
+Plugin 'hzchirs/vim-material'
+Plugin 'morhetz/gruvbox'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'scrooloose/nerdtree'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'scrooloose/nerdtree'
-Plugin 'sheerun/vim-polyglot'
+Plugin 'mattn/emmet-vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'vim-syntastic/syntastic'
 Plugin 'majutsushi/tagbar'
+"Plugin 'leafgarland/typescript-vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'Valloric/YouCompleteMe'
 
-" control p
-set runtimepath^=~/.vim/bundle/ctrlp.vim
+" vim-snipmate
+"Plugin 'MarcWeber/vim-addon-mw-utils'
+"Plugin 'tomtom/tlib_vim'
+"Plugin 'garbas/vim-snipmate'
+
+"" Optional:
+"Plugin 'honza/vim-snippets'
 
 call vundle#end()
-filetype plugin indent on
+" Vundle end
 
+" ControlP
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+
+" Syntastic setting
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" vim basic setting
+set encoding=utf-8
+set ruler
 set relativenumber
 set number
-syntax on
-set guicursor=i:block
+set tabstop=2
+set shiftwidth=2
+set autoindent
+set expandtab
 set hlsearch
 set incsearch
 set ignorecase
 set smartcase
 set lazyredraw
-set expandtab
-set shiftwidth=2
-set tabstop=2
-set autoindent
-set smartindent
-set encoding=utf-8
-set guioptions=
+set termguicolors
+set showcmd
+syntax on
+filetype plugin on
 
+" colorscheme
+set background=dark
+colorscheme gruvbox
+
+" autocmd
 autocmd vimenter * NERDTree
 autocmd vimenter * TagbarOpen
+ autocmd BufNewFile,BufRead *.ts set syntax=javascript
 
-set background=dark
-colorscheme hybrid_material
-let g:airline_theme = "hybrid"
+" Emmet.vim change expand key to tab 
+" let g:user_emmet_expandabbr_key='<Tab>'
+ imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
-" Emmet vim expand by tab
-imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+ " Add Typescript to Tagbar
+let g:tagbar_type_typescript = {
+  \ 'ctagsbin' : 'tstags',
+  \ 'ctagsargs' : '-f-',
+  \ 'kinds': [
+    \ 'e:enums:0:1',
+    \ 'f:function:0:1',
+    \ 't:typealias:0:1',
+    \ 'M:Module:0:1',
+    \ 'I:import:0:1',
+    \ 'i:interface:0:1',
+    \ 'C:class:0:1',
+    \ 'm:method:0:1',
+    \ 'p:property:0:1',
+    \ 'v:variable:0:1',
+    \ 'c:const:0:1',
+  \ ],
+  \ 'sort' : 0
+\ }
+
+" enable relativenumber on NERDTree
+" enable line numbers
+let NERDTreeShowLineNumbers=1
+" make sure relative line numbers are used
+autocmd FileType nerdtree setlocal relativenumber
+
+
