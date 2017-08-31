@@ -20,7 +20,7 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'majutsushi/tagbar'
-"Plugin 'leafgarland/typescript-vim'
+Plugin 'leafgarland/typescript-vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'Valloric/YouCompleteMe'
@@ -75,7 +75,8 @@ colorscheme gruvbox
 " autocmd
 autocmd vimenter * NERDTree
 autocmd vimenter * TagbarOpen
- autocmd BufNewFile,BufRead *.ts set syntax=javascript
+autocmd BufNewFile,BufRead *.ts set filetype=typescript
+autocmd BufNewFile,BufRead *.js set filetype=javascript
 
 " Emmet.vim change expand key to tab 
 " let g:user_emmet_expandabbr_key='<Tab>'
